@@ -116,7 +116,7 @@ const businesses = [
 outEl.innerHTML = "<h1>Active Businesses</h1>"
 
 businesses.forEach(business => {
-  outEl.innerHTML += `
+  outEl.innerHTML += activeBusinesses`
     <h2>${business.companyName}</h2>
     <section>
       ${business.addressFullStreet}
@@ -127,3 +127,19 @@ businesses.forEach(business => {
   `
   outEl.innerHTML += "<hr/>"
 });
+
+
+// Array to contain all the manufacturing businesses
+const manufacturingBusinesses = businesses.filter( business => {
+  let inManufacturing = false
+  if(business.companyIndustry === "Manufacturing"){
+    inManufacturing = true
+  }
+  return inManufacturing
+})
+console.log(manufacturingBusinesses)
+
+ 
+
+
+
