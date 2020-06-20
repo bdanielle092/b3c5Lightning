@@ -111,12 +111,12 @@ const businesses = [
     }
   ];
 
-
+// array to contain all the manufacturing businesses
   const outEl = document.querySelector("#output")
 outEl.innerHTML = "<h1>Active Businesses</h1>"
 
 businesses.forEach(business => {
-  outEl.innerHTML += activeBusinesses`
+  outEl.innerHTML += `
     <h2>${business.companyName}</h2>
     <section>
       ${business.addressFullStreet}
@@ -138,6 +138,67 @@ const manufacturingBusinesses = businesses.filter( business => {
   return inManufacturing
 })
 console.log(manufacturingBusinesses)
+
+outEl.innerHTML += "<h1>Purchasing Agents</h1>";
+
+/*
+    Using map(), you extract the purchasing agent object
+    from each business and store it in a new array
+*/
+const agents = businesses.map(business => {
+  return{ 
+    // this is pulling the info from the array 
+   "nameFirst": business.purchasingAgent.nameFirst,
+   "nameLast" : business.purchasingAgent.nameLast,
+   "companyName" : business.companyName,
+   "phoneWork": business.phoneWork
+
+  }
+})
+
+console.table(agents)
+
+agents.forEach(agent => {
+  // this is displaying the info on the dom 
+outEl.innerHTML += `<h2>${agent.nameFirst} ${agent.nameLast} </h2><h3>${agent.companyName}</h3><h3>${agent.phoneWork}</h3>`;
+
+outEl.innerHTML += "<hr/>";
+
+});
+
+document
+    .querySelector("#companySearch")
+    .addEventListener("keypress", keyPressEvent => {
+        if (keyPressEvent.charCode === 13) {
+            /* WHEN  USER PRESSES ENTER, FIND MATCHING BUSINESS */
+            const foundBusiness = businesses.find(
+                business =>
+                    business.companyName.includes(keyPressEvent.target.value)
+            );
+
+            outEl.innerHTML = `
+                <h2>
+                ${foundBusiness.companyName}
+                </h2>
+                <section>
+                ${foundBusiness.addressFullStreet}
+
+                </section>
+                <section>
+                ${foundBusiness.addressCity},
+                ${foundBusiness.addressStateCode}
+                ${foundBusiness.addressZipCode}
+                </section>
+            `;
+        }
+    });
+    
+
+
+
+
+
+
 
  
 
