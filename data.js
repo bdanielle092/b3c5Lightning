@@ -139,12 +139,15 @@ const manufacturingBusinesses = businesses.filter( business => {
 })
 console.log(manufacturingBusinesses)
 
-outEl.innerHTML += "<h1>Purchasing Agents</h1>";
+
+
 
 /*
     Using map(), you extract the purchasing agent object
     from each business and store it in a new array
 */
+
+outEl.innerHTML += "<h1>Purchasing Agents</h1>";
 const agents = businesses.map(business => {
   return{ 
     // this is pulling the info from the array 
@@ -169,13 +172,15 @@ outEl.innerHTML += "<hr/>";
 document
     .querySelector("#companySearch")
     .addEventListener("keypress", keyPressEvent => {
+      console.log(keyPressEvent)
         if (keyPressEvent.charCode === 13) {
             /* WHEN  USER PRESSES ENTER, FIND MATCHING BUSINESS */
             const foundBusiness = businesses.find(
                 business =>
-                    business.companyName.includes(keyPressEvent.target.value)
+                    business.purchasingAgent.nameFirst.includes(keyPressEvent.target.value) || 
+                    business.purchasingAgent.nameLast.includes(keyPressEvent.target.value)
             );
-
+           
             outEl.innerHTML = `
                 <h2>
                 ${foundBusiness.companyName}
@@ -193,9 +198,20 @@ document
         }
     });
 
-
-
+// Array to contain all the big spenders
+const bigSpenders = businesses.filter(business => {
+  let inOrders = false
+  business.orders.forEach(orders => {
     
+  })
+  if(business.orders >= 9000){
+    inOrders = true
+  }else{
+    return inOrders
+  }
+
+})
+  console.log(bigSpenders)  
 
 
 
