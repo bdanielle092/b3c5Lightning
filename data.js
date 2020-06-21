@@ -199,20 +199,23 @@ document
     });
 
 // Array to contain all the big spenders
+// This is filtering the list of business that spent 9000 on an order
 const bigSpenders = businesses.filter(business => {
   let inOrders = false
-  business.orders.forEach(orders => {
+  // The forEach is looking at the list of orders to see they spent over 9000
+  business.orders.forEach(order => {
+    if(order >= 9000){
+      inOrders = true
+    }
     
   })
-  if(business.orders >= 9000){
-    inOrders = true
-  }else{
-    return inOrders
+  // if true this returns the business name 
+  if(inOrders === true){
+    return business
   }
 
 })
   console.log(bigSpenders)  
-
 
 
 
